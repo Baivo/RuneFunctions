@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuneFunctions", "RuneFunctions.csproj", "{103618BB-2093-484A-A936-BC68EEE3C475}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{103618BB-2093-484A-A936-BC68EEE3C475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{103618BB-2093-484A-A936-BC68EEE3C475}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{103618BB-2093-484A-A936-BC68EEE3C475}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{103618BB-2093-484A-A936-BC68EEE3C475}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDF3B39A-848E-4509-9A70-C9B182A7E95B}
+	EndGlobalSection
+EndGlobal
