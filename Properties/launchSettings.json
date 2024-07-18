@@ -3,7 +3,11 @@
     "RuneFunctions": {
       "commandName": "Project",
       "commandLineArgs": "--port 7283",
-      "launchBrowser": false
+      "environmentVariables": {
+        "TableConnectionString": "DefaultEndpointsProtocol=https;AccountName=runedb;AccountKey=qSQWOOCIkHta50YFE06FAFElbJr6EmgDmLQQe9t7ofMrJf9hROIkZRH3Jy05a9isw5QZLsWmQButACDbg5oLQQ==;TableEndpoint=https://runedb.table.cosmos.azure.com:443/;",
+        "BlobConnectionString": "DefaultEndpointsProtocol=https;AccountName=b1vcorune;AccountKey=QxP9Eph7SPI/Z4+4qnDRIx7heRmWKnvBniTRHigkHXFER4um5nnheUYlvnDsb/EofajfPGn4sU2k+AStCs2lng==;BlobEndpoint=https://b1vcorune.blob.core.windows.net/;",
+        "OpenAiApiKey": "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"
+      }
     }
   }
 }

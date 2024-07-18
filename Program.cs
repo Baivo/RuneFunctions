@@ -1,5 +1,6 @@
 global using System.Net;
 global using System.Text;
+
 global using Newtonsoft.Json;
 global using Microsoft.Azure.Functions.Worker;
 global using Microsoft.Azure.Functions.Worker.Http;
@@ -19,6 +20,7 @@ var host = new HostBuilder()
         services.ConfigureFunctionsApplicationInsights();
 
         services.AddSingleton<IInteractionFunction, InteractionFunction>();
+
     })
     .Build();
 
