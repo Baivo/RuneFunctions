@@ -97,9 +97,13 @@ namespace RuneFunctions
         {
             try
             {
-                Environment.SetEnvironmentVariable("PUPPETEER_CACHE_DIR", AppContext.BaseDirectory);
-                var browserFetcher = new BrowserFetcher();
-                await browserFetcher.DownloadAsync();
+                var options = new BrowserFetcherOptions
+                {
+                    Path = Path.GetTempPath(),
+                };
+                var browserFetcher = new BrowserFetcher(options);
+                var revision = await browserFetcher.DownloadAsync();
+
                 await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
                 var page = await browser.NewPageAsync();
                 await page.SetUserAgentAsync("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3");
