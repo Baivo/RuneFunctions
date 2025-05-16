@@ -3,7 +3,7 @@ using Microsoft.OpenApi.Models;
 using RuneFunctions.Services;
 using PuppeteerSharp;
 
-namespace RuneFunctions
+namespace RuneFunctions.Functions
 {
     public interface IRegoFunction
     {

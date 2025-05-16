@@ -4,7 +4,7 @@ using OpenAI.ObjectModels.RequestModels;
 using OpenAI.ObjectModels;
 using OpenAI;
 
-namespace RuneFunctions
+namespace RuneFunctions.Functions
 {
     public class WebSummaryFunction
     {
@@ -80,7 +80,7 @@ namespace RuneFunctions
             var baseUrl = $"{funcUrl.Scheme}://{funcUrl.Host}";
 
             // Include the port if it's not the default port (80 for HTTP or 443 for HTTPS)
-            if (!((funcUrl.Scheme == "http" && funcUrl.Port == 80) || (funcUrl.Scheme == "https" && funcUrl.Port == 443)))
+            if (!(funcUrl.Scheme == "http" && funcUrl.Port == 80 || funcUrl.Scheme == "https" && funcUrl.Port == 443))
             {
                 baseUrl += $":{funcUrl.Port}";
             }

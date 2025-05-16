@@ -14,7 +14,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using System.Security.Policy;
 
-namespace RuneFunctions
+namespace RuneFunctions.Functions
 {
     public interface IImageGenFunction
     {

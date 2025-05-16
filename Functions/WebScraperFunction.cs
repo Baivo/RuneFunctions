@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Models;
 using PuppeteerSharp;
 using RuneFunctions.Services;
 
-namespace RuneFunctions
+namespace RuneFunctions.Functions
 {
     public class WebScraperFunction
     {
@@ -206,7 +206,7 @@ namespace RuneFunctions
                     node.Attributes.Remove("style");
             }
 
-            string cleanedText = System.Net.WebUtility.HtmlDecode(doc.DocumentNode.InnerText);
+            string cleanedText = WebUtility.HtmlDecode(doc.DocumentNode.InnerText);
             cleanedText = Regex.Replace(cleanedText, @"\s+", " ").Trim();
 
             return cleanedText;

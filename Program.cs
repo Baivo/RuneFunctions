@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PuppeteerSharp;
 using Microsoft.Extensions.Configuration;
+using RuneFunctions.Functions;
 
 
 var browserFetcher = new BrowserFetcher();
@@ -31,6 +32,7 @@ var host = new HostBuilder()
         });
         services.AddSingleton<IInteractionFunction, InteractionFunction>();
         services.AddSingleton<IRegoFunction, RegoFunction>();
+        services.AddHttpClient<UrbanDictionaryService>();
 
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();

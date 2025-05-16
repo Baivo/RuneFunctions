@@ -1,7 +1,7 @@
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Utilities.Encoders;
 
-namespace RuneFunctions
+namespace RuneFunctions.Functions
 {
     public interface IInteractionFunction
     {
