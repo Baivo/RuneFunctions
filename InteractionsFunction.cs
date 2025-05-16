@@ -44,7 +44,28 @@ namespace RuneFunctions
             }
 
             var interaction = JsonConvert.DeserializeObject<DiscordInteraction>(requestBody);
-            var interactionResponse = HandleInteraction(interaction);
+            object interactionResponse;
+            switch (interaction.Type)
+            {
+                case InteractionType.Ping:
+                    interactionResponse = HandlePing(interaction);
+                    break;
+                case InteractionType.ApplicationCommand:
+                    interactionResponse = HandleApplicationCommand(interaction);
+                    break;
+                case InteractionType.MessageComponent:
+                    interactionResponse = HandleMessageComponent(interaction);
+                    break;
+                case InteractionType.ModalSubmit:
+                    interactionResponse = HandleModalSubmit(interaction);
+                    break;
+                case InteractionType.ApplicationCommandAutocomplete:
+                    interactionResponse = HandleApplicationCommandAutocomplete(interaction);
+                    break;
+                default:
+                    interactionResponse = HandleUnknownInteraction(interaction);
+                    break;
+            }
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             await response.WriteAsJsonAsync(interactionResponse);
@@ -71,69 +92,76 @@ namespace RuneFunctions
                 return false;
             }
         }
-
-        private static object HandleInteraction(DiscordInteraction interaction)
+        private static object HandleApplicationCommand(DiscordInteraction interaction)
         {
-            
-            switch (interaction.Type)
+            InteractionData data = interaction.Data;
+
+
+            StringBuilder sb = new();
+            sb.AppendLine("Name: " + interaction.Data.Name);
+            sb.AppendLine("ID: " + interaction.Data.Id);
+            sb.AppendLine("Data: " + data);
+            return new
             {
-                case InteractionType.Ping:
-                    return new { type = InteractionResponseType.Pong };
+                type = InteractionResponseType.ChannelMessageWithSource,
+                data = new
+                {
+                    content = sb.ToString(),
+                }
+            };
 
-                case InteractionType.ApplicationCommand:
-                    return new
+        }
+        private static object HandlePing(DiscordInteraction interaction) 
+        {
+            return new { type = InteractionResponseType.Pong };
+        }
+        private static object HandleMessageComponent(DiscordInteraction interaction)
+        {
+            return new
+            {
+                type = InteractionResponseType.ChannelMessageWithSource,
+                data = new
+                {
+                    content = "Received a message component interaction!"
+                }
+            };
+        }
+        private static object HandleModalSubmit(DiscordInteraction interaction)
+        {
+            return new
+            {
+                type = InteractionResponseType.ChannelMessageWithSource,
+                data = new
+                {
+                    content = "Received a modal submit interaction!"
+                }
+            };
+        }
+        private static object HandleApplicationCommandAutocomplete(DiscordInteraction interaction)
+        {
+            return new
+            {
+                type = InteractionResponseType.ApplicationCommandAutocompleteResult,
+                data = new
+                {
+                    choices = new[]
                     {
-                        type = InteractionResponseType.ChannelMessageWithSource,
-                        data = new
-                        {
-                            content = "Received an application command!"
+                            new { name = "Choice 1", value = "choice_1" },
+                            new { name = "Choice 2", value = "choice_2" }
                         }
-                    };
-
-                case InteractionType.MessageComponent:
-                    return new
-                    {
-                        type = InteractionResponseType.ChannelMessageWithSource,
-                        data = new
-                        {
-                            content = "Received a message component interaction!"
-                        }
-                    };
-
-                //case InteractionType.ApplicationCommandAutocomplete:
-                //    return new
-                //    {
-                //        type = InteractionResponseType.ApplicationCommandAutocompleteResult,
-                //        data = new
-                //        {
-                //            choices = new[]
-                //            {
-                //                new { name = "Choice 1", value = "choice_1" },
-                //                new { name = "Choice 2", value = "choice_2" }
-                //            }
-                //        }
-                //    };
-
-                case InteractionType.ModalSubmit:
-                    return new
-                    {
-                        type = InteractionResponseType.ChannelMessageWithSource,
-                        data = new
-                        {
-                            content = "Received a modal submit interaction!"
-                        }
-                    };
-
-                default:
-                    return new
-                    {
-                        type = InteractionResponseType.ChannelMessageWithSource,
-                        data = new
-                        {
-                            content = "Unknown interaction type!"
-                        }
-                    };
-            }
+                }
+            };
+        }
+        private static object HandleUnknownInteraction(DiscordInteraction interaction)
+        {
+            return new
+            {
+                type = InteractionResponseType.ChannelMessageWithSource,
+                data = new
+                {
+                    content = "Received an unknown interaction!"
+                }
+            };
         }
     }
 
@@ -176,4 +204,5 @@ namespace RuneFunctions
         ApplicationCommandAutocompleteResult = 8,
         Modal = 9
     }
+    
 }

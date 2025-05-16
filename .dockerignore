@@ -1,0 +1,15 @@
+local.settings.json
+bin
+obj
+*.md
+.git
+.vscode
+docker-compose.*
+Dockerfile*
+.dockerignore
+README.md
+.gitignore
+**/RuneLib/**/bin/
+**/RuneLib/**/obj/
+**/RuneFunctions/**/bin/
+**/RuneFunctions/**/obj/
